@@ -41,7 +41,7 @@ function resetInterval() {
     if(timer) {
         clearInterval(timer);
     }
-    timer = setInterval(selectPerson, 10000);
+    timer = setInterval(selectPerson, process.env.TURN_LENGTH || 15000);
     selectPerson();
 }
 
