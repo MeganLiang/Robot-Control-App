@@ -1,8 +1,8 @@
-$(document).on('touchstart', function (e) {
-    e.preventDefault();
-});
+function init() {
+    $(document).on('touchstart', function (e) {
+        e.preventDefault();
+    });
 
-$(function () {
     var socket = new WebSocket("ws://" + location.host + "/socket");
     var canvas = $('canvas')[0];
     var isBlocked = true;
@@ -127,4 +127,10 @@ $(function () {
     window.onunload = function () {
         socket.close();
     }
+}
+$(function () {
+    $('#block').click(function () {
+        $('#block').remove();
+        init();
+    });
 });
