@@ -45,6 +45,10 @@ $(function () {
         }
     };
 
+    socket.onclose = function () {
+        window.location.reload();
+    };
+
     function setPosition(e) {
         var x = e.touches[0].clientX;
         var y = e.touches[0].clientY;
