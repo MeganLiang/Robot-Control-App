@@ -5,7 +5,7 @@ var socketServer = new require('ws').Server({server : http});
 var timer;
 var sockets = [];
 var robotSocket = null;
-var currentPerson = 0;
+var currentPerson = -1;
 var port = process.env.PORT || 3000;
 
 
@@ -20,6 +20,7 @@ app.get(['/', '/static/*'], function (req, response) {
 
 
 socketServer.on('connection', function (socket) {
+    console.log("Client connected");
     socket.on('close', disconnect.bind(this, socket));
     socket.on('message', dataReceived.bind(this, socket));
     sockets.push(socket);
@@ -62,6 +63,7 @@ function dataReceived(socket, e) {
 
 
 function selectPerson() {
+    console.log("selecting person");
     var oldPerson = sockets[currentPerson];
     if(!sockets.some(isReady)) {
         return;
@@ -73,6 +75,7 @@ function selectPerson() {
         }
     }
     var newPerson = sockets[currentPerson];
+    console.log("New person selected");
     if(isReady(oldPerson)) {
         oldPerson.send("fuckoff");
     }
